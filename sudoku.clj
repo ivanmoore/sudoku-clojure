@@ -22,8 +22,7 @@
 
 (defn match-known-values [board puzzle]
   (matche [board puzzle]
-    ([[] []]
-      succeed)
+    ([[] []])
     ([[_ . board_tail] [0 . puzzle_tail]]
       (match-known-values board_tail puzzle_tail))
     ([[known_value . board_tail] [known_value . puzzle_tail]]
