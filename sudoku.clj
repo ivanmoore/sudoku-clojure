@@ -20,23 +20,23 @@
         y (range 0 9 3)]
     (get-square rows x y)))
 
-(defn match-known-values [board puzzle]
-  (matche [board puzzle]
+(defn match-known-values [solution puzzle]
+  (matche [solution puzzle]
     ([[] []])
-    ([[_ . board_tail] [0 . puzzle_tail]]
-      (match-known-values board_tail puzzle_tail))
-    ([[known_value . board_tail] [known_value . puzzle_tail]]
-      (match-known-values board_tail puzzle_tail))))
+    ([[_ . solution_tail] [0 . puzzle_tail]]
+      (match-known-values solution_tail puzzle_tail))
+    ([[known_value . solution_tail] [known_value . puzzle_tail]]
+      (match-known-values solution_tail puzzle_tail))))
 
 (defn sudokufd [puzzle]
-  (let [board (repeatedly 81 lvar)
-        rows (as-rows board)
+  (let [solution (repeatedly 81 lvar)
+        rows (as-rows solution)
         cols (as-cols rows)
         squares (as-squares rows)]
     (run* [q]
-      (== q board)
-      (everyg #(fd/in % (fd/interval 1 9)) board)
-      (match-known-values board puzzle)
+      (== q solution)
+      (everyg #(fd/in % (fd/interval 1 9)) solution)
+      (match-known-values solution puzzle)
       (everyg fd/distinct rows)
       (everyg fd/distinct cols)
       (everyg fd/distinct squares))))
