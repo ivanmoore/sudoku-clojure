@@ -16,8 +16,8 @@
     (get-in rows [x y])))
 
 (defn as-squares [rows]
-  (for [x (range 0 9 3)
-        y (range 0 9 3)]
+  (for [x [0 3 6]
+        y [0 3 6]]
     (get-square rows x y)))
 
 (defn match-known-values [solution puzzle]
